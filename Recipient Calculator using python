@@ -1,0 +1,27 @@
+def generate_receipt(tax_rate=0.07, discount_rate=0.1):
+  items = []
+  subtotal = 0
+  while True:
+    item_name = input("Enter item name (or type 'done' to finish): ").strip()
+    if item_name.lower() == 'done':
+      break
+    price = float(input(f"Enter price for {item_name}: $"))
+    quantity = int(input(f"Enter quantity for {item_name}: "))
+    total_price = price * quantity
+    items.append((item_name, price, quantity, total_price))
+    subtotal += total_price
+  print("\n====== RECEIPT ======")
+  print(f"{'Item':<20}{'Price ($)':>10}{'Qty':>10}{'Total ($)':>12}")
+  print("-" * 52)
+  for item_name, price, quantity, total_price in items:
+    print(f"{item_name:<20}{price:>10.2f}{quantity:>10}{total_price:>12.2f}")
+  tax = subtotal * tax_rate
+  discount = subtotal * discount_rate
+  total = subtotal + tax- discount
+  print("-" * 52)
+  print(f"{'Subtotal:':<40}{subtotal:>12.2f}")
+  print(f"{'Tax (7%):':<40}{tax:>12.2f}")
+  print(f"{'Discount (10%):':<40}{-discount:>12.2f}")
+  print(f"{'Total:':<40}{total:>12.2f}")
+  print("=====================\n")
+generate_receipt()
